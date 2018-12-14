@@ -4,7 +4,21 @@ from .forms import NewTweetForm
 # Create your views here.
 # 
 def index(request):
-    return render(request, "sns/index.html")
+    tweet_list = NewTweet.objects.values_list("tweet", flat=True)
+    id_list = NewTweet.objects.values_list("tweet", flat=True)
+    id_list = list(id_list)
+    like_list = []
+    for i in id_list:
+        try:
+            if Like.objects.get(new_tweet_id=i):
+                like = "like is done"
+                like_list.append(like)
+        except:
+            like = "like"
+            like_list.append(like)   
+    tweets = zip(id_list, tweet_list, like_list)
+    tweets = list(tweets)             
+    return render(request, "sns/index.html", {"tweets": tweets})
 
 
 def new(request):
@@ -38,3 +52,13 @@ def update(request, tweet_id):
         new_tweet = new_tweet.as_table()
         f = {"new_tweet":new_tweet}
         return render(request, "sns/index.html", f) 
+
+
+def like(request, tweet_id):
+    try:
+        if Like.objects.get(new_tweet_id=tweet_id):
+            Like.objects.filter(new_tweet_id=tweet_id).delete()
+    except:
+        like = Like(new_tweet_id=tweet_id)
+        like.save()
+    return redirect("/")

@@ -4,6 +4,7 @@
         {{ t }}
         <a href="{% url 'delete' tweet_id=i %}">Delete</a>
         <a href="{% url 'update' tweet_id=i %}">Update</a>
+        <p><a href="{% url 'like' tweet_id=i %}">{{ i }}</a></p>
         </li>
     </ul>
 {% endfor %}

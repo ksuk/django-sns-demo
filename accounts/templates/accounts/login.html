@@ -1,0 +1,17 @@
+<form method="POST" action="{% url 'login' %}">
+{% csrf_token %}
+
+<table>
+    <tr>
+        <td>{{ form.username.labell_tag }}</td>
+        <td>{{ form.username }}</td>
+    </tr>
+    <tr>
+        <td>{{ form.password.tabel_tag }}</td>
+        <td>{{ form.password }}</td>
+    </tr>
+</table>
+<input type="submit" value="login" />
+<input type="hidden" name="next" value="{{ newxt }}" />
+</form>
+
