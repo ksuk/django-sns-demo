@@ -1,0 +1,9 @@
+{% for t in tweets%}
+    <ul>
+        <li>
+        {{ t }}
+        <a href="{% url 'delete' tweet_id=i %}">Delete</a>
+        <a href="{% url 'update' tweet_id=i %}">Update</a>
+        </li>
+    </ul>
+{% endfor %}

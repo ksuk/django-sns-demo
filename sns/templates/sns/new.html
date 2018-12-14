@@ -1,0 +1,6 @@
+<form method="POST" action="new">
+{% csrf_token %}
+<table>
+    {{ new_tweet }}
+    <tr><input type="submit" value="Submit"></tr>
+</table>
